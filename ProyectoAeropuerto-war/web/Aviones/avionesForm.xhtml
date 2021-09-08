@@ -1,0 +1,29 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <div id="izquierda">
+        <h:outputText value="Numero de Avion: "/>
+        <h:inputText value="#{avionController.avion.numeroAvion}" maxlength="20" validator="numeroValidator" required="true" requiredMessage="El numero de avion es necesario."/><br></br>
+        <br/>
+    </div>
+
+    <div id="centro">
+        <h:outputText value="Aerolinea: "/>
+        <h:inputText value="#{avionController.avion.aerolinea}" maxlength="35" validator="palabrasValidator" required="true" requiredMessage="La aerolinea es necesaria."/><br></br>
+        <br/>
+
+        <h:outputText value="Modelo: "/>
+        <h:inputText value="#{avionController.avion.modelo}" maxlength="25" validator="CodigoValidator" required="true" requiredMessage="El modelo es necesario."/><br></br>
+        <br/>
+    </div>
+
+    <div id="derecha">
+        <h:outputText value="Capacidad de pasajeros: "/>
+        <h:inputText value="#{avionController.avion.capacidadPasajeros}" validator="numeroValidator" required="true" requiredMessage="La capacidad de pasajeros es necesaria."/><br></br>
+        <br/>
+    </div>
+</ui:composition>
+
+

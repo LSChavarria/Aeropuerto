@@ -1,0 +1,46 @@
+html, body {
+    margin: 0px;
+    padding: 0px;
+    font-size: 35px;
+}
+
+#top {
+     background-color: crimson;
+     margin: 0px;
+     text-align: center;
+     color: #ffffff;
+}
+
+#contenedor {
+    position: relative;
+    height: 50%;
+    max-height: 500px;
+    width: 100%;
+}
+
+#botones {
+    margin-top: 30px;
+    width: 100%;
+    text-align: center;
+}
+
+.boton {
+    background: #0000ff;
+    border-color: #3333ff;
+    border-radius: 20px;
+    border-width: 3px;
+    color: #ffffff;
+    width: 20%;
+    margin: 1%;
+    font-size: 25px;
+}
+
+.boton:hover {
+    background: #3333ff;
+    border-color: #0000ff;
+}
+
+#form {
+    width: 100%;
+    text-align: center;
+}

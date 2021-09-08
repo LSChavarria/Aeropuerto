@@ -1,0 +1,30 @@
+html, body {
+    margin: 0px;
+    padding: 0px;
+}
+
+#top {
+     background-color: crimson;
+     margin: 0px;
+     text-align: center;
+     color: #ffffff;
+}
+
+#contenedor {
+    position: relative;
+    height: 50%;
+    max-height: 500px;
+    width: 100%;
+    display: inline-block;
+    margin: auto;
+}
+
+#extras {
+    width: 100%;
+    text-align: center;
+}
+
+.tabla {
+    width: 100%;
+    text-align: center;
+}

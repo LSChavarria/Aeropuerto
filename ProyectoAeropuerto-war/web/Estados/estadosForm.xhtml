@@ -1,0 +1,18 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <div id="mensajes">
+        <h:outputText value="Nombre: "/>
+        <h:inputText value="#{estadoController.estado.nombre}" maxlength="35" validator="nombreValidator" required="true" requiredMessage="El nombre es necesario."/>
+        <br/>
+
+        <h:outputText value="Pais: "/>
+        <h:selectOneMenu value="#{estadoController.estado.pais}" required="true" requiredMessage="El pais es requerido">
+            <f:selectItem itemLabel="Seleccione un pais" noSelectionOption="true" itemValue="0"/>
+            <f:selectItems value="#{paisController.fingAllTypedQuery()}" var="p" itemLabel="#{p.nombre}"/>
+        </h:selectOneMenu>
+        <br/>
+    </div>
+</ui:composition>

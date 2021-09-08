@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Vuelos List</title>
+        <meta http-equiv="Content-Type" content="text/html; charset-UTF-S"/>
+        <link rel="stylesheet" type="text/css" href="./../Recursos/CSS/list.css" media="screen" />
+    </h:head>
+    <h:body>
+        <h:form>
+            <div id="top">
+                <h1>Vuelos List</h1>
+            </div>
+
+            <div id="contenedor">
+                <div id="extras">
+                    <h:messages/>
+                    <h:commandButton value="Agregar nuevo" action="#{vueloController.mainClean('vuelosAlta')}"/>
+                    <h:commandButton value="Regresar" action="#{vueloController.mainClean('/menu')}"/>
+                </div>
+                <h:dataTable class="tabla" value="#{vueloController.fingAllTypedQuery()}" var="v" border="5">
+                    <h:column>
+                        <f:facet name="header">Numero de vuelo</f:facet>
+                            #{v.numeroVuelo}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Numero de avion</f:facet>
+                            #{v.numeroAvion.numeroAvion}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Origen</f:facet>
+                            #{v.origen.nombre}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Destino</f:facet>
+                            #{v.destino.nombre}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Fecha de inicio de vuelo</f:facet>
+                        <h:outputText value="#{v.fechaInicio}">
+                            <f:convertDateTime type="date" pattern="dd/MM/yyyy" timeZone="GMT-5"/>
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Fecha de fin de vuelo</f:facet>
+                        <h:outputText value="#{v.fechaFin}">
+                            <f:convertDateTime type="date" pattern="dd/MM/yyyy" timeZone="GMT-5"/>
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Hora de inicio de vuelo</f:facet>
+                        <h:outputText value="#{v.horaInicio}">
+                            <f:convertDateTime type="time" pattern="hh:mm aa" timeZone="GMT-5"/>
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Hora de fin de vuelo</f:facet>
+                        <h:outputText value="#{v.horaFin}">
+                            <f:convertDateTime type="time" pattern="hh:mm aa" timeZone="GMT-5"/>
+                        </h:outputText>
+                    </h:column>
+                    <c:set var = "perfil" scope = "session" value = "#{sessionScope.usuario.perfil}"/>
+                    <c:if test="${perfil == 3}">
+                        <h:column>
+                            <f:facet name="header">Editar</f:facet>
+                            <h:commandButton value="Editar" action="#{vueloController.prepareEdit(v)}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Eliminar</f:facet>
+                            <h:commandButton value="Eliminar" action="#{vueloController.prepareDelete()}" rendered="#{!vueloController.confirm}"/>
+                            <h:commandButton value="Si" rendered="#{vueloController.confirm}" action="#{vueloController.delete(v)}"/>
+                            <h:commandButton value="No" rendered="#{vueloController.confirm}" action="#{vueloController.mainClean('vuelosList')}"/>
+                        </h:column>
+                    </c:if>
+                </h:dataTable>
+            </div>
+        </h:form>
+    </h:body>
+</html>
+

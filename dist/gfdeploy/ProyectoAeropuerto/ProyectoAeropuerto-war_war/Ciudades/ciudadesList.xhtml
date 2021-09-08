@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Ciudades List</title>
+        <meta http-equiv="Content-Type" content="text/html; charset-UTF-S"/>
+        <link rel="stylesheet" type="text/css" href="./../Recursos/CSS/list.css" media="screen" />
+    </h:head>
+    <h:body>
+        <h:form>
+            <div id="top">
+                <h1>Ciudades List</h1>
+            </div>
+
+            <div id="contenedor">
+                <div id="extras">
+                    <h:messages/>
+                    <h:commandButton value="Agregar nuevo" action="#{ciudadController.mainClean('ciudadesAlta')}"/>
+                    <h:commandButton value="Regresar" action="/menu"/>
+                </div>
+                <h:dataTable class="tabla" value="#{ciudadController.fingAllTypedQuery()}" var="c" border="5">
+                    <h:column>
+                        <f:facet name="header">Nombre</f:facet>
+                            #{c.nombre}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Estado</f:facet>
+                            #{c.estado.nombre}
+                    </h:column>
+                    <c:set var = "perfil" scope = "session" value = "#{sessionScope.usuario.perfil}"/>
+                    <c:if test="${perfil == 3}">
+                        <h:column>
+                            <f:facet name="header">Editar</f:facet>
+                            <h:commandButton value="Editar" action="#{ciudadController.prepareEdit(c)}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Eliminar</f:facet>
+                            <h:commandButton value="Eliminar" action="#{ciudadController.prepareDelete()}" rendered="#{!ciudadController.confirm}"/>
+                            <h:commandButton value="Si" rendered="#{ciudadController.confirm}" action="#{ciudadController.delete(c)}"/>
+                            <h:commandButton value="No" rendered="#{ciudadController.confirm}" action="#{ciudadController.mainClean('ciudadesList')}"/>
+                        </h:column>
+                    </c:if>
+                </h:dataTable>
+            </div>
+        </h:form>
+    </h:body>
+</html>
+

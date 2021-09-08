@@ -1,0 +1,66 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <div id="izquierda">
+        <h:outputText value="Numero de Vuelo: "/>
+        <h:inputText value="#{vueloController.vuelo.numeroVuelo}" maxlength="20" validator="numeroValidator" required="true" requiredMessage="El numero de vuelo es necesario."/><br></br>
+        <br/>
+
+        <h:outputText value="Numero de Avion: "/>
+        <h:selectOneMenu value="#{vueloController.vuelo.numeroAvion}" required="true" requiredMessage="El numero de avion es requerido">
+            <f:selectItem itemLabel="Seleccione un avion" noSelectionOption="true" itemValue="0"/>
+            <f:selectItems value="#{avionController.fingAllTypedQuery()}" var="a" itemLabel="#{a.numeroAvion}"/>
+        </h:selectOneMenu><br></br>
+        <br/>
+
+        <h:outputText value="Origen: "/>
+        <h:selectOneMenu value="#{vueloController.vuelo.origen}" required="true" requiredMessage="El origen es requerido">
+            <f:selectItem itemLabel="Seleccione un origen" noSelectionOption="true" itemValue="0"/>
+            <f:selectItems value="#{ciudadController.fingAllTypedQuery()}" var="c" itemLabel="#{c.nombre}, #{c.estado.nombre}"/>
+        </h:selectOneMenu><br></br>
+        <br/>
+
+    </div>
+
+    <div id="centro">
+        <h:outputText value="Destino: "/>
+        <h:selectOneMenu value="#{vueloController.vuelo.destino}" required="true" requiredMessage="El destino es requerido">
+            <f:selectItem itemLabel="Seleccione un destino" noSelectionOption="true" itemValue="0"/>
+            <f:selectItems value="#{ciudadController.fingAllTypedQuery()}" var="c" itemLabel="#{c.nombre}, #{c.estado.nombre}"/>
+        </h:selectOneMenu><br></br>
+        <br/>
+
+        <h:outputText value="Numero de pasajeros: "/>
+        <h:inputText value="#{vueloController.vuelo.numeroPasajeros}" validator="numeroValidator" required="true" requiredMessage="El numero de pasajeros es necesario."/><br></br>
+        <br/>
+
+        <h:outputText value="Fecha inicio vuelo: "/>
+        <h:inputText value="#{vueloController.vuelo.fechaInicio}">
+            <f:convertDateTime type="date" pattern="dd/MM/yyyy" timeZone="GMT-5"/>
+        </h:inputText><br></br>
+        <br/>
+
+    </div>
+
+    <div id="derecha">
+        <h:outputText value="Fecha fin vuelo: "/>
+        <h:inputText value="#{vueloController.vuelo.fechaFin}">
+            <f:convertDateTime type="date" pattern="dd/MM/yyyy" timeZone="GMT-5"/>
+        </h:inputText><br></br>
+        <br/>
+
+        <h:outputText value="Hora inicio vuelo: "/>
+        <h:inputText value="#{vueloController.vuelo.horaInicio}">
+            <f:convertDateTime type="time" pattern="HH:mm" timeZone="GMT-5"/>
+        </h:inputText><br></br>
+        <br/>
+
+        <h:outputText value="Hora fin vuelo: "/>
+        <h:inputText value="#{vueloController.vuelo.horaFin}">
+            <f:convertDateTime type="time" pattern="HH:mm" timeZone="GMT-5"/>
+        </h:inputText><br></br>
+        <br/>
+    </div>
+</ui:composition>

@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Paises List</title>
+        <meta http-equiv="Content-Type" content="text/html; charset-UTF-S"/>
+        <link rel="stylesheet" type="text/css" href="./../Recursos/CSS/list.css" media="screen" />
+    </h:head>
+    <h:body>
+        <h:form>
+            <div id="top">
+                <h1>Paises List</h1>
+            </div>
+
+            <div id="contenedor">
+                <div id="extras">
+                    <h:messages/>
+                    <h:commandButton value="Agregar nuevo" action="#{paisController.mainClean('paisesAlta')}"/>
+                    <h:commandButton value="Regresar" action="/menu"/>
+                </div>
+                <h:dataTable class="tabla" value="#{paisController.fingAllTypedQuery()}" var="p" border="5">
+                    <h:column>
+                        <f:facet name="header">Nombre</f:facet>
+                            #{p.nombre}
+                    </h:column>
+                    <c:set var = "perfil" scope = "session" value = "#{sessionScope.usuario.perfil}"/>
+                    <c:if test="${perfil == 3}">
+                        <h:column>
+                            <f:facet name="header">Editar</f:facet>
+                            <h:commandButton value="Editar" action="#{paisController.prepareEdit(p)}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Eliminar</f:facet>
+                            <h:commandButton value="Eliminar" action="#{paisController.prepareDelete()}" rendered="#{!paisController.confirm}"/>
+                            <h:commandButton value="Si" rendered="#{paisController.confirm}" action="#{paisController.delete(p)}"/>
+                            <h:commandButton value="No" rendered="#{paisController.confirm}" action="#{paisController.mainClean('paisesList')}"/>
+                        </h:column>
+                    </c:if>
+                </h:dataTable>
+            </div>
+        </h:form>
+    </h:body>
+</html>
+

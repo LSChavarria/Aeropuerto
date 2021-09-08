@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Usuarios List</title>
+        <meta http-equiv="Content-Type" content="text/html; charset-UTF-S"/>
+        <link rel="stylesheet" type="text/css" href="./../Recursos/CSS/list.css" media="screen" />
+    </h:head>
+    <h:body>
+        <h:form>
+            <div id="top">
+                <h1>Usuarios List</h1>
+            </div>
+
+            <div id="contenedor">
+                <div id="extras">
+                    <h:messages/>
+                    <h:commandButton value="Agregar nuevo" action="#{usuarioController.mainClean('usuariosAlta')}"/>
+                    <h:commandButton value="Regresar" action="/menu"/>
+                </div>
+                <h:dataTable class="tabla" value="#{usuarioController.findAllTypedQuery()}" var="u" border="5">
+                    <h:column>
+                        <f:facet name="header">Nombre</f:facet>
+                            #{u.nombre}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Email</f:facet>
+                            #{u.email}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Contraseña</f:facet>
+                            #{u.contrasena}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Perfil</f:facet>
+                            #{u.perfil}
+                    </h:column>
+                    <c:set var = "perfil" scope = "session" value = "#{sessionScope.usuario.perfil}"/>
+                    <c:if test="${perfil == 3}">
+                        <h:column>
+                            <f:facet name="header">Editar</f:facet>
+                            <h:commandButton value="Editar" action="#{usuarioController.prepareEdit(u)}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Eliminar</f:facet>
+                            <h:commandButton value="Eliminar" action="#{usuarioController.prepareDelete()}" rendered="#{!usuarioController.confirm}"/>
+                            <h:commandButton value="Si" rendered="#{usuarioController.confirm}" action="#{usuarioController.delete(u)}"/>
+                            <h:commandButton value="No" rendered="#{usuarioController.confirm}" action="#{usuarioController.mainClean('usuariosList')}"/>
+                        </h:column>
+                    </c:if>
+                </h:dataTable>
+            </div>
+        </h:form>
+    </h:body>
+</html>
+

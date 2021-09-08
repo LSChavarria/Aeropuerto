@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <!--Web -> JSF Page-->
+    <h:head>
+        <title>Iniciar secion</title>
+        <meta http-equiv="Content-Type" content="text/html; charset-UTF-S"/>
+        <link rel="stylesheet" type="text/css" href="Recursos/CSS/index.css" media="screen" />
+    </h:head>
+    <h:body>
+        <h:form>
+            <div id="top">
+                <h1>Index</h1>
+            </div>
+            <div id="contenedor">
+                <div id="form">
+                    <h:outputText value="Correo: "/>
+                    <br/>
+                    <h:inputText required="true" requiredMessage="El correo es necesario" value="#{usuarioController.email}"></h:inputText>
+                    <br/>
+
+                    <h:outputText value="Contraseña: "/>
+                    <br/>
+                    <h:inputSecret required="true" requiredMessage="La contraseña es necesaria" value="#{usuarioController.contrasena}"></h:inputSecret>
+                    <br/>
+                </div>
+                
+                <div id="botones">
+                    <h:commandButton class="boton" value="Iniciar Secion" action="#{usuarioController.iniciarSecion()}"></h:commandButton>
+                </div>
+            </div>
+        </h:form>
+    </h:body>
+</html>
+
